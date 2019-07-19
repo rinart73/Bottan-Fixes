@@ -1,0 +1,6 @@
+# ========== mods\Bottan Fixes\data\scripts\player\story\smugglerdelivery.lua ==========
+#: mods\Bottan Fixes\data\scripts\player\story\smugglerdelivery.lua:
+msgid "Hyperspace Overloader couldn't withstand the pressure! The job is done, but the system upgrade broke."
+msgstr ""
+
+
