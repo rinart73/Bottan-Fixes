@@ -29,9 +29,8 @@ function bottanFixes_deferredDestroySmugglerBlocker(craftIndex)
     -- remove Hyperspace Overloader from a ship
     local shipSystem = ShipSystem(craft)
     if not shipSystem then return end
-    local upgrade
     for i = 0, shipSystem.numSlots - 1 do
-        upgrade = shipSystem:getUpgrade(i)
+        local upgrade = shipSystem:getUpgrade(i)
         if upgrade and upgrade.script == "data/scripts/systems/smugglerblocker.lua" then
             shipSystem:removeUpgrade(i)
             break
