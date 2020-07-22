@@ -6,7 +6,7 @@ local Azimuth = include("azimuthlib-basic")
 
 local bottanFixes_configOptions = {
   _version = { default = "1.0", comment = "Config version. Don't touch." },
-  ChanceToDestroyUpgrade = { default = 0.15, min = 0, max = 1, comment = "Chance to break Hyperspace Overloader when player destroys Bottan's hyperdrive. 0.75 = 75%" },
+  ChanceToDestroyUpgrade = { default = 0, min = 0, max = 1, comment = "Chance to break Hyperspace Overloader when player destroys Bottan's hyperdrive. 0.75 = 75%" },
   UpgradeDeletionDelay = { default = 3, min = 0, max = 10, comment = "Delay in seconds before Hyperspace Overloader upgrade will break. Used to display 'Bottan's hyperdrive destroyed' message on client" }
 }
 local BottanFixesConfig, bottanFixes_isModified = Azimuth.loadConfig("BottanFixes", bottanFixes_configOptions)
