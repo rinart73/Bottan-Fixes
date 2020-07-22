@@ -14,10 +14,16 @@ function onStartDialog(...)
 end
 
 function onBlock(entityId) -- overridden
+    local entity = Entity(entityId)
+    local title = entity.title
+    entity:setTitle("", {})
+
     local dialog = {}
     dialog.text = "Charging ..."%_t .. "\n" .. "The hyperspace engine has been destroyed."%_t
     -- no follow up
     ScriptUI(entityId):showDialog(dialog)
+
+    entity:setTitle(title, {})
 
     invokeServerFunction("onBlock", entityId)
 end
