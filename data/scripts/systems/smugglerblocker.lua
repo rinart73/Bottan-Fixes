@@ -1,15 +1,16 @@
 PermanentInstallationOnly = true
 
-local bottanFixes_onStartDialog -- client, extended
-local bottanFixes_onBlock -- server, extended
+local bof_onStartDialog -- client, extended
+local bof_onBlock -- server, extended
+
 
 if onClient() then
 
 
-bottanFixes_onStartDialog = onStartDialog
+bof_onStartDialog = onStartDialog
 function onStartDialog(...)
     if getPermanent() and Player().craftIndex == Entity().index then
-        bottanFixes_onStartDialog(...)
+        bof_onStartDialog(...)
     end
 end
 
@@ -32,16 +33,16 @@ end
 else -- onServer
 
 
-bottanFixes_onBlock = onBlock
+bof_onBlock = onBlock
 function onBlock(...)
     local player = Player(callingPlayer)
     if not player or player.craftIndex ~= Entity().index then return end -- make sure that player is in the ship
     if not getPermanent() then return end -- should be installed as permanent now
 
-    bottanFixes_onBlock(...)
+    bof_onBlock(...)
 
     if player:hasScript("data/scripts/player/story/smugglerdelivery.lua") then
-        player:invokeFunction("data/scripts/player/story/smugglerdelivery.lua", "bottanFixes_destroySmugglerBlocker")
+        player:invokeFunction("data/scripts/player/story/smugglerdelivery.lua", "bof_destroySmugglerBlocker")
     end
 end
 

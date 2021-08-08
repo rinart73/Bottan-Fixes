@@ -1,7 +1,12 @@
+local bof_onShotHit -- extended server function
+
+
 if onServer() then
 
 
-local bottanFixes_onShotHit = onShotHit
+if GameVersion() < Version("1.3.5") then
+
+bof_onShotHit = onShotHit
 function onShotHit(...)
     if not wasHit and not canFlee then
         for _, player in pairs({Sector():getPlayers()}) do
@@ -9,7 +14,9 @@ function onShotHit(...)
         end
     end
 
-    bottanFixes_onShotHit(...)
+    bof_onShotHit(...)
+end
+
 end
 
 -- onCantJump shouldn't be callable by a client

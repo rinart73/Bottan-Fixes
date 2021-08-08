@@ -2,30 +2,32 @@ if onServer() then
 
 
 include("randomext")
-local Azimuth = include("azimuthlib-basic")
+Azimuth = include("azimuthlib-basic")
 
-local bottanFixes_configOptions = {
+local bof_configOptions = {
   _version = { default = "1.0", comment = "Config version. Don't touch." },
   ChanceToDestroyUpgrade = { default = 0, min = 0, max = 1, comment = "Chance to break Hyperspace Overloader when player destroys Bottan's hyperdrive. 0.75 = 75%" },
   UpgradeDeletionDelay = { default = 3, min = 0, max = 10, comment = "Delay in seconds before Hyperspace Overloader upgrade will break. Used to display 'Bottan's hyperdrive destroyed' message on client" }
 }
-local BottanFixesConfig, bottanFixes_isModified = Azimuth.loadConfig("BottanFixes", bottanFixes_configOptions)
-if bottanFixes_isModified then
-    Azimuth.saveConfig("BottanFixes", BottanFixesConfig, bottanFixes_configOptions)
+local bof_config, bof_isModified = Azimuth.loadConfig("BottanFixes", bof_configOptions)
+if bof_isModified then
+    Azimuth.saveConfig("BottanFixes", bof_config, bof_configOptions)
 end
-bottanFixes_configOptions = nil
+bof_configOptions = nil
 
-function bottanFixes_destroySmugglerBlocker()
+function bof_destroySmugglerBlocker()
     local craft = Player().craft
     if not craft then return end
-    if BottanFixesConfig.ChanceToDestroyUpgrade ~= 0 and BottanFixesConfig.ChanceToDestroyUpgrade >= math.random() then
-        deferredCallback(BottanFixesConfig.UpgradeDeletionDelay, "bottanFixes_deferredDestroySmugglerBlocker", craft.index) -- we can't immediately remove system, because this crashes the game :/
+
+    if bof_config.ChanceToDestroyUpgrade ~= 0 and bof_config.ChanceToDestroyUpgrade >= math.random() then
+        deferredCallback(bof_config.UpgradeDeletionDelay, "bof_deferredDestroySmugglerBlocker", craft.index) -- we can't immediately remove system, because this crashes the game :/
     end
 end
 
-function bottanFixes_deferredDestroySmugglerBlocker(craftIndex)
+function bof_deferredDestroySmugglerBlocker(craftIndex)
     local craft = Sector():getEntity(craftIndex)
     if not craft then return end
+
     -- remove Hyperspace Overloader from a ship
     local shipSystem = ShipSystem(craft)
     if not shipSystem then return end
